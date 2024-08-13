@@ -22,7 +22,8 @@ The following commands are built into
 
 .TP
 .B cd
-Change the current directory. Usage:
+Change the current directory.
+Usage:
 .I "cd [directory]"
 
 .TP
@@ -37,7 +38,7 @@ Display a help message with a list of built-in commands.
 .BR
 
 .SH USAGE
-When
+
 .B simple_shell
 Is run, it displays a prompt where the user can enter commands. The shell will then execute the command and return to the prompt.
 
@@ -56,14 +57,14 @@ $
 .EE
 
 .SH EXIT STATUS
-The
+
 .B simple_shell
-Exits with the status of the last command executed. If the
+Exits with the status of the last command executed. 
 .B exit
 Command is used, the shell will exit with the status specified by the user.
 
 .SH FILES
-The
+
 .B simple_shell
 Does not use any external configuration files. All functionality is implemented within the binary.
 
