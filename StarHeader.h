@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef STARHEADER_H
+#define STARHEADER_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,5 +20,6 @@ char *get_command_path(char *command, char **environ);
 void execute_child_process(char *command_path, char **args, char **environ);
 void print_env(char **environ);
 int handle_builtin_commands(char **args, char *input, char **environ);
+void remove_newline(char *str);
 
-#endif /* MAIN_H */
+#endif /* STARHEADER_H */

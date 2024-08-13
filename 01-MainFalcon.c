@@ -1,4 +1,4 @@
-#include "00-StarHeader.h"
+#include "StarHeader.h"
 
 
 /**
@@ -35,6 +35,27 @@ int handle_builtin_commands(char **args, char *input, char **environ)
 }
 
 /**
+ * remove_newline - replace the '\n' by a null byte
+ * @str: string to be tested
+ */
+void remove_newline(char *str)
+{
+	size_t i = 0;
+
+	/* Iterate over the string until the newline */
+	/* character or end of string is found */
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0'; /* Replace newline with null terminator */
+			break;
+		}
+		i++;
+	}
+}
+
+/**
  * main - Entry point of the simple shell
  * @argc: Argument count
  * @argv: Argument vector
@@ -67,7 +88,7 @@ int main(int argc, char **argv, char **envp)
 		}
 
 		/* Remove the newline character from the input */
-		input[strcspn(input, "\n")] = 0;
+		remove_newline(input);
 		/* Split the input into an array of arguments */
 		args = split_string(input);
 
