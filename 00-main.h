@@ -18,13 +18,7 @@ char *_getenv(const char *name, char **environ);
 char	*find_in_path(char *command, char **environ);
 char *get_command_path(char *command, char **environ);
 void execute_child_process(char *command_path, char **args, char **environ);
-
-
-void exec_command(char **args);
-void wait_for_child(void);
 int shell_exit(char **args);
-int shell_env(char **args, char **environ);
-void print_env(char **environ);
-void print_path_directories(char **environ);
+
 
 #endif /* MAIN_H */
