@@ -1,5 +1,4 @@
-#include "00-main.h"
-
+#include "00-StarHeader.h"
 
 /**
  * execute_command - Executes a command if it exists
@@ -10,38 +9,42 @@
  */
 int execute_command(char **args, char **environ)
 {
-	pid_t pid;
-	char *command_path;
+	pid_t pid; /* Process ID for the forked process */
+	char *command_path; /* Path to the command executable */
 
+	/* Check if the command is empty */
 	if (args[0] == NULL)
 		return (1);
 
+	/* Get the full path of the command */
 	command_path = get_command_path(args[0], environ);
 	if (command_path == NULL)
 	{
+		/* Print error if the command is not found */
 		fprintf(stderr, "%s: command not found\n", args[0]);
 		return (1);
 	}
 
-	pid = fork();
+	pid = fork(); /* Create a child process */
 	if (pid == -1)
 	{
-		perror("Fork failed");
+		perror("Fork failed"); /* Handle fork error */
 		if (command_path != args[0])
 			free(command_path);
 		return (-1);
 	}
 	if (pid == 0)
 	{
+		/* In the child process, execute the command */
 		execute_child_process(command_path, args, environ);
 	}
 	else
 	{
-		int status;
-
+		int status; /* Status of the child process */
+		/* Wait for the child process to finish */
 		wait(&status);
 	}
-
+	/* Free the command path if it was dynamically allocated */
 	if (command_path != args[0])
 		free(command_path);
 
@@ -57,13 +60,16 @@ int execute_command(char **args, char **environ)
  */
 char *get_command_path(char *command, char **environ)
 {
+	/* Structure to hold file status information */
 	struct stat st;
-	char *command_path;
+	char *command_path; /* Path to the command executable */
 
+	/* Check if the command is a full path and exists */
 	if (command[0] == '/' && stat(command, &st) == 0)
 	{
 		return (command);
 	}
+	/* Search for the command in the PATH */
 	command_path = find_in_path(command, environ);
 	return (command_path);
 }
@@ -76,53 +82,13 @@ char *get_command_path(char *command, char **environ)
  */
 void execute_child_process(char *command_path, char **args, char **environ)
 {
+	/* Execute the command using execve */
 	if (execve(command_path, args, environ) == -1)
 	{
+		/* Handle execution error */
 		perror("Execution failed");
 		if (command_path != args[0])
 			free(command_path);
 		exit(EXIT_FAILURE);
 	}
-}
-
-/**
- * find_in_path - Searches for an executable in the PATH directories
- * @command: The command to find
- * @environ: The environment variables
- *
- * Return: The full path of the executable, or NULL if not found
- */
-char	*find_in_path(char *command, char **environ)
-{
-	char	*path_env = _getenv("PATH", environ);
-	char	*path_copy, *token, *full_path;
-	struct stat	st;
-
-	if (!path_env)
-		return (NULL);
-
-	path_copy = _strdup(path_env);
-	if (!path_copy)
-		return (NULL);
-
-	token = strtok(path_copy, ":");
-	while (token != NULL)
-	{
-		full_path = malloc(strlen(token) + strlen(command) + 2);
-		if (!full_path)
-		{
-			free(path_copy);
-			return (NULL);
-		}
-		sprintf(full_path, "%s/%s", token, command);
-		if (stat(full_path, &st) == 0)
-		{
-			free(path_copy);
-			return (full_path);
-		}
-		free(full_path);
-		token = strtok(NULL, ":");
-	}
-	free(path_copy);
-	return (NULL);
 }
