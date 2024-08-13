@@ -20,7 +20,9 @@ int	main(int argc, char **argv, char **envp)
 
 	while (status)
 	{
-		printf("#cisfun$ "); /* Display the prompt */
+		if (isatty(STDIN_FILENO))
+			printf("#cisfun$ "); /* Display the prompt only in interactive mode */
+
 		if (getline(&input, &bufsize, stdin) == -1)
 		{
 			if (feof(stdin))
@@ -39,6 +41,14 @@ int	main(int argc, char **argv, char **envp)
 		input[strcspn(input, "\n")] = 0;
 		/* Split the input into arguments */
 		args = split_string(input);
+
+		/* Check for exit command */
+		if (args != NULL && strcmp(args[0], "exit") == 0)
+		{
+			free(args);
+			free(input);
+			exit(EXIT_SUCCESS);
+		}
 
 		/* Execute the command */
 		if (args != NULL)
