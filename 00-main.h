@@ -16,6 +16,9 @@ char *_strdup(const char *str);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_getenv(const char *name, char **environ);
 char	*find_in_path(char *command, char **environ);
+char *get_command_path(char *command, char **environ);
+void execute_child_process(char *command_path, char **args, char **environ);
+
 
 void exec_command(char **args);
 void wait_for_child(void);

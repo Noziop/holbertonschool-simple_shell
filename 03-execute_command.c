@@ -1,5 +1,6 @@
 #include "00-main.h"
 
+
 /**
  * execute_command - Executes a command if it exists
  * @args: An array of arguments for the command
@@ -7,15 +8,15 @@
  *
  * Return: 1 if the shell should continue running, 0 if it should terminate
  */
-int	execute_command(char **args, char **environ)
+int execute_command(char **args, char **environ)
 {
-	pid_t	pid;
-	char	*command_path;
+	pid_t pid;
+	char *command_path;
 
 	if (args[0] == NULL)
 		return (1);
 
-	command_path = find_in_path(args[0], environ);
+	command_path = get_command_path(args[0], environ);
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: command not found\n", args[0]);
@@ -26,30 +27,63 @@ int	execute_command(char **args, char **environ)
 	if (pid == -1)
 	{
 		perror("Fork failed");
-		free(command_path);
+		if (command_path != args[0])
+			free(command_path);
 		return (-1);
 	}
 	if (pid == 0)
 	{
-		/* Child process */
-		if (execve(command_path, args, environ) == -1)
-		{
-			perror("Execution failed");
-			free(command_path);
-			exit(EXIT_FAILURE);
-		}
+		execute_child_process(command_path, args, environ);
 	}
 	else
 	{
-		/* Parent process */
-		int	status;
+		int status;
 
 		wait(&status);
 	}
-	free(command_path);
+
+	if (command_path != args[0])
+		free(command_path);
+
 	return (1);
 }
 
+/**
+ * get_command_path - Determines the path of the command
+ * @command: The command to find
+ * @environ: The environment variables
+ *
+ * Return: The full path of the executable, or NULL if not found
+ */
+char *get_command_path(char *command, char **environ)
+{
+	struct stat st;
+	char *command_path;
+
+	if (command[0] == '/' && stat(command, &st) == 0)
+	{
+		return (command);
+	}
+	command_path = find_in_path(command, environ);
+	return (command_path);
+}
+
+/**
+ * execute_child_process - Executes the command in the child process
+ * @command_path: The path of the command
+ * @args: The arguments for the command
+ * @environ: The environment variables
+ */
+void execute_child_process(char *command_path, char **args, char **environ)
+{
+	if (execve(command_path, args, environ) == -1)
+	{
+		perror("Execution failed");
+		if (command_path != args[0])
+			free(command_path);
+		exit(EXIT_FAILURE);
+	}
+}
 
 /**
  * find_in_path - Searches for an executable in the PATH directories
