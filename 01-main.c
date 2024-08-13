@@ -35,10 +35,8 @@ int	main(int argc, char **argv, char **envp)
 				exit(EXIT_FAILURE);
 			}
 		}
-
 		/* Remove newline character */
 		input[strcspn(input, "\n")] = 0;
-
 		/* Split the input into arguments */
 		args = split_string(input);
 
@@ -47,10 +45,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			status = execute_command(args, envp);
 		}
-
 		free(args);
 	}
-
 	free(input);
 	return (0);
 }
