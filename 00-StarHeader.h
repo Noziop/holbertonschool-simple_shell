@@ -15,10 +15,10 @@ char **split_string(char *str);
 char *_strdup(const char *str);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_getenv(const char *name, char **environ);
-char	*find_in_path(char *command, char **environ);
+char *find_in_path(char *command, char **environ);
 char *get_command_path(char *command, char **environ);
 void execute_child_process(char *command_path, char **args, char **environ);
-int shell_exit(char **args);
-
+void print_env(char **environ);
+int handle_builtin_commands(char **args, char *input, char **environ);
 
 #endif /* MAIN_H */
