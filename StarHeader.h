@@ -10,6 +10,8 @@
 #include <sys/stat.h>
 #include <linux/limits.h>
 
+#define BUFFER_SIZE 1024
+
 /* Function prototypes */
 int execute_command(char **args, char **environ, char *program_name);
 char **split_string(char *str);
@@ -23,5 +25,7 @@ void print_env(char **environ);
 int handle_builtin_commands(char **args, char *input, char **environ);
 void remove_newline(char *str);
 void display_prompt(void);
+void execute_command_(char **args);
+int execute_ls_with_color(char **args);
 
 #endif /* STARHEADER_H */

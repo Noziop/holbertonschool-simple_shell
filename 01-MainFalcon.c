@@ -13,7 +13,7 @@ int handle_builtin_commands(char **args, char *input, char **environ)
 {
 	/* Check if args is NULL or the first argument is NULL */
 	if (args == NULL || args[0] == NULL)
-		return (1);
+		return (1); /* Continue running the shell */
 
 	/* If the command is 'exit', free resources and exit the shell */
 	if (strcmp(args[0], "exit") == 0)
@@ -27,10 +27,16 @@ int handle_builtin_commands(char **args, char *input, char **environ)
 	if (strcmp(args[0], "env") == 0)
 	{
 		print_env(environ);
-		return (0); /* Return 0 to indicate command was handled */
+		return (0); /* Command was handled */
 	}
 
-	/* Return 1 to indicate that the command is not a built-in */
+	/* If the command is 'ls', execute with color */
+	if (strcmp(args[0], "ls") == 0)
+	{
+		return (execute_ls_with_color(args));
+	}
+
+	/* Return (1) to indicate that the command is not a built-in */
 	return (1);
 }
 
