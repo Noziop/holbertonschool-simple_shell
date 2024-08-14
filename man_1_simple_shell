@@ -6,6 +6,8 @@ simple_shell \- A simple UNIX command interpreter
 .B simple_shell
 [\fIoptions\fR]
 
+#include "00-main.h"
+
 .SH DESCRIPTION
 .B simple_shell
 Is a simple UNIX command interpreter that mimics the behavior of the standard UNIX shell. It reads commands from the user, parses them, and executes them as if they were entered in a standard shell.
@@ -19,6 +21,7 @@ Does not have any command-line options. It runs interactively by default, waitin
 .SH COMMANDS
 The following commands are built into
 .B simple_shell:
+
 
 .TP
 .B cd
@@ -44,7 +47,7 @@ Is run, it displays a prompt where the user can enter commands. The shell will t
 
 For example:
 
-.EX
+.SH EXEMPLES
 $ simple_shell
 simple_shell> ls -l
 total 64
@@ -54,6 +57,15 @@ simple_shell> echo "Hello, World!"
 Hello, World!
 simple_shell> exit
 $
+.EE
+
+.EXAMPLES
+.TP
+.B Running a simple command
+Run the `ls` command to list directory contents:
+.EX
+$ simple_shell
+simple_shell> ls -la
 .EE
 
 .SH EXIT STATUS
@@ -67,6 +79,12 @@ Command is used, the shell will exit with the status specified by the user.
 
 .B simple_shell
 Does not use any external configuration files. All functionality is implemented within the binary.
+
+.SH DIAGNOSTICS
+.TP
+.B Command not found
+This error occurs when the command entered by the user is not found in the system's PATH.
+
 
 .SH BUGS
 No known bugs at this time. If you encounter any issues, please report them to the project maintainers.
