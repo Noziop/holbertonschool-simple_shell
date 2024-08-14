@@ -100,7 +100,7 @@ int main(int argc, char **argv, char **envp)
 		}
 
 		/* Execute external commands */
-		status = execute_command(args, envp);
+		status = execute_command(args, envp, argv[0]);
 		free(args); /* Free the arguments array */
 	}
 	free(input); /* Free the input buffer */

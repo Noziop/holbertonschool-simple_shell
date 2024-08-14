@@ -4,10 +4,11 @@
  * execute_command - Executes a command if it exists
  * @args: An array of arguments for the command
  * @environ: The environment variables
+ * @program_name: name of program
  *
  * Return: 1 if the shell should continue running, 0 if it should terminate
  */
-int execute_command(char **args, char **environ)
+int execute_command(char **args, char **environ, char *program_name)
 {
 	pid_t pid; /* Process ID for the forked process */
 	char *command_path; /* Path to the command executable */
@@ -21,7 +22,7 @@ int execute_command(char **args, char **environ)
 	if (command_path == NULL)
 	{
 		/* Print error if the command is not found */
-		fprintf(stderr, "%s: command not found\n", args[0]);
+		fprintf(stderr, "%s 1 : %s: not found\n", program_name, args[0]);
 		return (1);
 	}
 

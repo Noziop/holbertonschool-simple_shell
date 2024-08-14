@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 /* Function prototypes */
-int execute_command(char **args, char **environ);
+int execute_command(char **args, char **environ, char *program_name);
 char **split_string(char *str);
 char *_strdup(const char *str);
 int _strncmp(const char *s1, const char *s2, size_t n);
