@@ -8,20 +8,7 @@
  */
 int shell_exit(char **args)
 {
-	if (args[1])
-	/* Convert the output code supplied into a number. */
-	{
-		char *endptr;
-		long exit_code = strtol(args[1], &endptr, 10);
+	 (void)args;			/* Ignores arguments because they are unnecessary. */
 
-		if (*endptr) /* Check that the conversion is valid.*/
-		{
-			fprintf(stderr, "exit: %s: Argument non valide\n", args[1]);
-			return (1);
-		}
-
-		exit((int)exit_code); /* Close the shell. */
-	}
-	/* If no arguments are supplied, exit as normal. */
-	exit(0);
+	return (0);				/* Simply close the shell with exit code 0. */
 }
