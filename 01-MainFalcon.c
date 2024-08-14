@@ -78,7 +78,7 @@ int main(int argc, char **argv, char **envp)
 	{
 		/* Display the prompt only in interactive mode */
 		if (isatty(STDIN_FILENO))
-			printf("#cisfun$ ");
+			display_prompt();
 
 		/* Read a line of input from the user */
 		if (getline(&input, &bufsize, stdin) == -1)
@@ -105,4 +105,31 @@ int main(int argc, char **argv, char **envp)
 	}
 	free(input); /* Free the input buffer */
 	return (0); /* Return success */
+}
+
+/**
+ * display_prompt - function to display prompt
+ */
+void display_prompt(void)
+{
+	char cwd[PATH_MAX]; /* Buffer to store the current working directory */
+	char *username; /* Pointer to store the username */
+
+	/* Get the username from the environment */
+	username = getenv("USER");
+	if (username == NULL)
+		username = "unknown"; /* Fallback if USER is not set */
+
+	/* Get the current working directory */
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		perror("getcwd() error");
+		return;
+	}
+
+	/* Display the prompt in green with username and current directory */
+	if (isatty(STDIN_FILENO))
+	printf("\033[1;32m%s@\033[0m", username);
+	printf("\033[1;31mXa-C24&Noziop_shell\033[0m:");
+	printf("\033[1;34m%s\033[0m$ ", cwd);
 }

@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <linux/limits.h>
 
 /* Function prototypes */
 int execute_command(char **args, char **environ, char *program_name);
@@ -21,5 +22,6 @@ void execute_child_process(char *command_path, char **args, char **environ);
 void print_env(char **environ);
 int handle_builtin_commands(char **args, char *input, char **environ);
 void remove_newline(char *str);
+void display_prompt(void);
 
 #endif /* STARHEADER_H */
