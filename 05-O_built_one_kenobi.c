@@ -44,45 +44,50 @@ int handle_builtin_commands(char **args, char *input, char **environ)
  * builtin_cd - handle the cd cmd
  * @args: command and arguments
  *
- * Return: 0 if success.
+ * Return: 0 if success, -1 if error.
  */
 
 int builtin_cd(char **args)
 {
-	char *home_dir = getenv("HOME");
-	char *old_pwd = getenv("OLDPWD");
+	char *dir;
 	char cwd[PATH_MAX];
+	char *oldpwd = getenv("OLDPWD");
 
-	if (args[1] == NULL || strcmp(args[1], "~") == 0)
+	if (args[1] == NULL || strcmp(args[1], "~") == 0
+	|| strcmp(args[1], "$HOME") == 0)
 	{
-		if (chdir(home_dir) != 0)
-			perror("cd");
+		dir = getenv("HOME");
 	}
 	else if (strcmp(args[1], "-") == 0)
 	{
-		if (old_pwd)
+		if (oldpwd == NULL)
 		{
-			if (chdir(old_pwd) != 0)
-				perror("cd");
-			else
-				printf("%s\n", old_pwd);
-		}
-		else
 			fprintf(stderr, "cd: OLDPWD not set\n");
+			return (-1);
+		}
+		dir = oldpwd;
+		printf("%s\n", dir);
 	}
 	else
 	{
-		if (chdir(args[1]) != 0)
-			perror("cd");
+		dir = args[1];
 	}
-
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		setenv("OLDPWD", getenv("PWD"), 1);
-		setenv("PWD", cwd, 1);
+		perror("getcwd error");
+		return (-1);
 	}
-	else
-		perror("getcwd");
-
+	if (chdir(dir) == -1)
+	{
+		perror("cd");
+		return (-1);
+	}
+	setenv("OLDPWD", cwd, 1);
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		perror("getcwd error");
+		return (-1);
+	}
+	setenv("PWD", cwd, 1);
 	return (0);
 }
