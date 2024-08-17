@@ -1,5 +1,25 @@
 #include "StarHeader.h"
 
+/**
+ * remove_newline - replace the '\n' by a null byte
+ * @str: string to be tested
+ */
+void remove_newline(char *str)
+{
+	size_t i = 0;
+
+	/* Iterate over the string until the newline */
+	/* character or end of string is found */
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0'; /* Replace newline with null terminator */
+			break;
+		}
+		i++;
+	}
+}
 
 /**
  * split_string - Splits a string into an array of words

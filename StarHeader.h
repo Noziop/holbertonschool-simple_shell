@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <linux/limits.h>
 
 #define BUFFER_SIZE 1024
@@ -27,5 +28,7 @@ void remove_newline(char *str);
 void display_prompt(void);
 void execute_command_(char **args);
 int execute_ls_with_color(char **args);
+int builtin_cd(char **args);
+void sigint_handler(int sig);
 
 #endif /* STARHEADER_H */

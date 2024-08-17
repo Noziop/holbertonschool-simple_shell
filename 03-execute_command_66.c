@@ -10,51 +10,34 @@
  */
 int execute_command(char **args, char **environ, char *program_name)
 {
-	char *command_path; /* Path to the command executable */
+	char *command_path;
 
-	/* Check if the command is empty */
 	if (args[0] == NULL)
 		return (1);
 
-	/* Get the full path of the command */
-	command_path = get_command_path(args[0], environ);
+	if (args[0][0] == '/' || args[0][0] == '.')
+	{
+		command_path = args[0];
+	}
+	else
+	{
+		command_path = get_command_path(args[0], environ);
+	}
+
 	if (command_path == NULL)
 	{
-		/* Print error if the command is not found */
-		fprintf(stderr, "%s 1 : %s: not found\n", program_name, args[0]);
+		fprintf(stderr, "%s: 1: %s: not found\n", program_name, args[0]);
 		return (1);
 	}
 
 	execute_command_(args);
-	/* Free the command path if it was dynamically allocated */
+
 	if (command_path != args[0])
 		free(command_path);
 
 	return (1);
 }
 
-/**
- * get_command_path - Determines the path of the command
- * @command: The command to find
- * @environ: The environment variables
- *
- * Return: The full path of the executable, or NULL if not found
- */
-char *get_command_path(char *command, char **environ)
-{
-	/* Structure to hold file status information */
-	struct stat st;
-	char *command_path; /* Path to the command executable */
-
-	/* Check if the command is a full path and exists */
-	if (command[0] == '/' && stat(command, &st) == 0)
-	{
-		return (command);
-	}
-	/* Search for the command in the PATH */
-	command_path = find_in_path(command, environ);
-	return (command_path);
-}
 
 /**
  * execute_child_process - Executes the command in the child process

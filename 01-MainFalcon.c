@@ -1,66 +1,5 @@
 #include "StarHeader.h"
 
-
-/**
- * handle_builtin_commands - Handles built-in shell commands
- * @args: Array of command arguments
- * @input: The input string
- * @environ: The environment variables
- *
- * Return: 1 if the shell should continue running, 0 if it should terminate
- */
-int handle_builtin_commands(char **args, char *input, char **environ)
-{
-	/* Check if args is NULL or the first argument is NULL */
-	if (args == NULL || args[0] == NULL)
-		return (1); /* Continue running the shell */
-
-	/* If the command is 'exit', free resources and exit the shell */
-	if (strcmp(args[0], "exit") == 0)
-	{
-		free(args);
-		free(input);
-		exit(EXIT_SUCCESS);
-	}
-
-	/* If the command is 'env', print the environment variables */
-	if (strcmp(args[0], "env") == 0)
-	{
-		print_env(environ);
-		return (0); /* Command was handled */
-	}
-
-	/* If the command is 'ls', execute with color */
-	if (strcmp(args[0], "ls") == 0)
-	{
-		return (execute_ls_with_color(args));
-	}
-
-	/* Return (1) to indicate that the command is not a built-in */
-	return (1);
-}
-
-/**
- * remove_newline - replace the '\n' by a null byte
- * @str: string to be tested
- */
-void remove_newline(char *str)
-{
-	size_t i = 0;
-
-	/* Iterate over the string until the newline */
-	/* character or end of string is found */
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\n')
-		{
-			str[i] = '\0'; /* Replace newline with null terminator */
-			break;
-		}
-		i++;
-	}
-}
-
 /**
  * main - Entry point of the simple shell
  * @argc: Argument count
@@ -93,18 +32,18 @@ int main(int argc, char **argv, char **envp)
 			exit(EXIT_SUCCESS); /* Exit the shell on EOF */
 		}
 
+		/* avoid CTRL+C */
+		signal(SIGINT, sigint_handler);
 		/* Remove the newline character from the input */
 		remove_newline(input);
 		/* Split the input into an array of arguments */
 		args = split_string(input);
-
 		/* Handle built-in commands */
 		if (handle_builtin_commands(args, input, envp) == 0)
 		{
 			free(args); /* Free the arguments array */
 			continue; /* Continue the loop for the next command */
 		}
-
 		/* Execute external commands */
 		status = execute_command(args, envp, argv[0]);
 		free(args); /* Free the arguments array */
@@ -139,3 +78,4 @@ void display_prompt(void)
 	printf("\033[1;31mXa-C24&Noziop_shell\033[0m:");
 	printf("\033[1;34m%s\033[0m$ ", cwd);
 }
+
