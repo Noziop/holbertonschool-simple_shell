@@ -64,7 +64,7 @@ Note : This `README.md` will be updated several times as the project progresses.
 	|-----------| -------------------------------------------------------------------------------------------------------------		|
 	|00-main.h | is the header file which contains the standared header file and prototype of o function used in the program.		|		
 	|01-main.c |This code is a simple implementation of a shell in C																|
-	|02-split_string.c | Ce code contient deux fonctions utilitaires pour un shell simple en C : split_string  - _strdup			|	
+	|02-split_string.c |  This code contains two utility functions for a simple C shell: split_string - _strdup			|	
 	|03-execute_command.c | code for execute the command.																			|
 	|04-environnement_function.c |  is used to obtain the value of an environment variable from an array of character strings.		|
 	|.gitignore| which files and folders should be ignored by Git when tracking changes in a repository.							|
@@ -243,7 +243,7 @@ sudo mkdir -p /usr/local/man/man1
 After creating the directory structure, installing the manpage with `sudo`to ensure to have the necessary permissions:
 
 ```sh
-sudo mv man_1_simple_shell /usr/local/man/man1/man_1_simple_shell.1
+sudo cp man_1_simple_shell /usr/local/man/man1/man_1_simple_shell.1
 ```
 
 Little breakdown about what this all about:
