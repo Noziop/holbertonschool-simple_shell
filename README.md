@@ -60,7 +60,6 @@ Note : This `README.md` will be updated several times as the project progresses.
 
 ## Files
 
-<<<<<<< HEAD
 	| File name | Description |
 	|-----------| -------------------------------------------------------------------------------------------------------------|
 	|StarHeader.h | Contains the declarations of functions defined in other .c files. |
@@ -77,20 +76,6 @@ Note : This `README.md` will be updated several times as the project progresses.
 	|man_1_simple_shell | Is the man page for the shell we are going to write.|
 	|AUTHORS | File at the root of your repository, listing all individuals having contributed content to the repository.|
 	|simpleshell.flowchart.png | Flow diagram illustrating the operation or structure of a simple shell project.|
-=======
-	
-	00-main.h - is the header file which contains the standared header file and prototype of o function used in the program.
-	01-main.c - This code is a simple implementation of a shell in C
-	02-split_string.c - Ce code contient deux fonctions utilitaires pour un shell simple en C : split_string  - _strdup
-	03-execute_command.c - code for execute the command.
-	04-environnement_function.c -  is used to obtain the value of an environment variable from an array of character strings.
-	.gitignore - which files and folders should be ignored by Git when tracking changes in a repository.
-	LICENSE - the licence grants to anyone who obtains a copy of the software the right to use the software without restriction.
-	README.md - description about the project repository.
-	man_1_simple_shell - is the man page for the shell we are going to write.
-	AUTHORS - file at the root of your repository, listing all individuals having contributed content to the repository.
-	simpleshell.flowchart.png - flow diagram illustrating the operation or structure of a simple shell project.
->>>>>>> 585d6e13e34b0db8a1f143e56a84a2be43200799
 
 Before begining, ensure that you have the following requirements:
 
