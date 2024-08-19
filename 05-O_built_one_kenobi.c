@@ -6,17 +6,19 @@
  * @args: Array of command arguments
  * @input: The input string
  * @environ: The environment variables
+ * @program_name: name of shell exec to print correct error output
  *
  * Return: 1 if the shell should continue running, 0 if it should terminate
  */
-int handle_builtin_commands(char **args, char *input, char **environ)
+int handle_builtin_commands(char **args, char *input,
+					char **environ, char *program_name)
 {
 	if (args == NULL || args[0] == NULL)
 		return (1);
 
 	if (strcmp(args[0], "exit") == 0)
 	{
-		shell_exit(args, input);
+		shell_exit(args, input, program_name);
 	}
 
 	if (strcmp(args[0], "env") == 0)
@@ -47,8 +49,7 @@ int handle_builtin_commands(char **args, char *input, char **environ)
 
 int builtin_cd(char **args)
 {
-	char *dir;
-	char cwd[PATH_MAX];
+	char *dir, cwd[PATH_MAX];
 	char *oldpwd = getenv("OLDPWD");
 
 	if (args[1] == NULL || strcmp(args[1], "~") == 0
@@ -91,26 +92,34 @@ int builtin_cd(char **args)
 }
 
 /**
- * int shell_exit - exit shell terminal
+ * shell_exit - exit shell terminal
  * @args: Array of command arguments
  * @input: The input string
- *
+ * @program_name: name of shell exec to print correct error output
+ * Return: EXIT_SUCCESS if no argument is given by user
+ *			exit_code provided by user within args[1]
  */
 
-int shell_exit(char **args, char *input)
+int shell_exit(char **args, char *input, char *program_name)
 {
-	int exit_code = _atoi(args[1]);
+	int exit_code;
 
 	if (args[1] != NULL)
 	{
-		free(args);
-		free(input);
-		exit(exit_code);
+		if (args[1][0] == '-' || !is_valid_number(args[1]))
+		{
+			fprintf(stderr, "%s: 1: exit: Illegal number: %s\n", program_name, args[1]);
+			return (1);
+		}
+		exit_code = _atoi(args[1]);
 	}
 	else
 	{
-		free(args);
-		free(input);
-		exit(EXIT_SUCCESS);
+		exit_code = EXIT_SUCCESS;
 	}
+
+	free(args);
+	free(input);
+	exit(exit_code);
 }
+

@@ -28,3 +28,26 @@ int _atoi(char *s)
 		}
 		return (numb);
 }
+
+/**
+ * is_valid_number - checks if exit code is a valid number.
+ * @str: string to be tested
+ * Return: 1 if valid
+ *			0 if not valid
+ */
+int is_valid_number(const char *str)
+{
+	int i = 0;
+
+	if (str[0] == '+')
+		i++;
+
+	for (; str[i] != '\0'; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+
+	return (1);
+}
+

@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **envp)
 		/* Split the input into an array of arguments */
 		args = split_string(input);
 		/* Handle built-in commands */
-		if (handle_builtin_commands(args, input, envp) == 0)
+		if (handle_builtin_commands(args, input, envp, argv[0]) == 0)
 		{
 			free(args); /* Free the arguments array */
 			continue; /* Continue the loop for the next command */
