@@ -7,7 +7,7 @@ Our team consists of **Fassih Belmokthar** "Noziop" and **Xavier Piedallu** "Xa-
 
 First, clone this repository to your local machine:
 
-			**git clone** https://github.com/Noziop/holbertonschool-simple_shell.git
+			git clone https://github.com/Noziop/holbertonschool-simple_shell.git
 
 For this project, we will adopt the following method to facilitate collaboration:
 
@@ -38,7 +38,7 @@ The respective command typed by the user is then parsed and executed as if in a 
 
 Note : This `README.md` will be updated several times as the project progresses.
 
-## Summary
+##  Summary
 
 	- [Project `Simple Shell`](#project-Simple Shell)
 		- [Summary](#summary)
@@ -60,22 +60,22 @@ Note : This `README.md` will be updated several times as the project progresses.
 
 ## Files
 
-	| File name | Description |
-	|-----------| -------------------------------------------------------------------------------------------------------------|
-	|StarHeader.h | Contains the declarations of functions defined in other .c files. |
-	|01-MainFalcon.c | Is the header file which contains the standared header file and prototype of o function used in the program.|		
-	|02-split_string.c |  This code contains two utility functions for a simple C shell: split_string - _strdup	|	
-	|03-execute_command.c | Code for execute the command. |
-	|04-environnement_function.c |  Is used to obtain the value of an environment variable from an array of character strings.|
-	|05-O_built_one_kenobi.c | This C file implements several functions that manage built-in commands for a simple shell program.|
-	|07-What happens? | Blog post explaining what happens when you type 'ls -l *.c' in the shell.	|
-	|helpers.c | Custom ATOI function |
-	|.gitignore| Which files and folders should be ignored by Git when tracking changes in a repository.|
-	|LICENSE | The licence grants to anyone who obtains a copy of the software the right to use the software without restriction.|
-	|README.md | Description about the project repository.|
-	|man_1_simple_shell | Is the man page for the shell we are going to write.|
-	|AUTHORS | File at the root of your repository, listing all individuals having contributed content to the repository.|
-	|simpleshell.flowchart.png | Flow diagram illustrating the operation or structure of a simple shell project.|
+| Files names | Descriptions |
+|-----------| -------------------------------------------------------------------------------------------------------------|
+|StarHeader.h | Contains the declarations of functions defined in other .c files. |
+|01-MainFalcon.c | Is the header file which contains the standared header file and prototype of o function used in the program.|		
+|02-split_string.c |  This code contains two utility functions for a simple C shell: split_string - _strdup	|	
+|03-execute_command.c | Code for execute the command. |
+|04-environnement_function.c |  Is used to obtain the value of an environment variable from an array of character strings.|
+|05-O_built_one_kenobi.c | This C file implements several functions that manage built-in commands for a simple shell program.|
+|07-What happens? | Blog post explaining what happens when you type 'ls -l *.c' in the shell.|
+|helpers.c | Custom ATOI function |
+|.gitignore| Which files and folders should be ignored by Git when tracking changes in a repository.|
+|LICENSE | The licence grants to anyone who obtains a copy of the software the right to use the software without restriction.|
+|README.md | Description about the project repository.|
+|man_1_simple_shell | Is the man page for the shell we are going to write.|
+|AUTHORS | File at the root of your repository, listing all individuals having contributed content to the repository.|
+|simpleshell.flowchart.png | Flow diagram illustrating the operation or structure of a simple shell project.|
 
 Before begining, ensure that you have the following requirements:
 
