@@ -34,7 +34,7 @@ int handle_builtin_commands(char **args, char *input,
 
 	if (strcmp(args[0], "ls") == 0)
 	{
-		return (execute_ls_with_color(args));
+		return (execute_ls_with_color(args, environ));
 	}
 
 	return (1);

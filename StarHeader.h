@@ -27,8 +27,8 @@ int handle_builtin_commands(char **args, char *input,
 	char **environ, char *program_name);
 void remove_newline(char *str);
 void display_prompt(void);
-void execute_command_(char **args);
-int execute_ls_with_color(char **args);
+void execute_command_(char *command_path, char **args, char **environ);
+int execute_ls_with_color(char **args, char **environ);
 int builtin_cd(char **args);
 void sigint_handler(int sig);
 int shell_exit(char **args, char *input, char *program_name);

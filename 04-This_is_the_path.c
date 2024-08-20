@@ -10,18 +10,17 @@
  */
 char *get_command_path(char *command, char **environ)
 {
-	/* Structure to hold file status information */
-	struct stat st;
-	char *command_path; /* Path to the command executable */
+    struct stat st;
 
-	/* Check if the command is a full path and exists */
-	if (command[0] == '/' && stat(command, &st) == 0)
-	{
-		return (command);
-	}
-	/* Search for the command in the PATH */
-	command_path = find_in_path(command, environ);
-	return (command_path);
+    if (command[0] == '/' || command[0] == '.')
+    {
+        if (stat(command, &st) == 0)
+        {
+            return (strdup(command));
+        }
+        return (NULL);
+    }
+    return (find_in_path(command, environ));
 }
 
 /**
