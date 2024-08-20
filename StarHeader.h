@@ -29,7 +29,7 @@ void remove_newline(char *str);
 void display_prompt(void);
 void execute_command_(char *command_path, char **args, char **environ);
 int execute_ls_with_color(char **args, char **environ);
-int builtin_cd(char **args);
+int builtin_cd(char **args, char **env);
 void sigint_handler(int sig);
 int shell_exit(char **args, char *input, char *program_name);
 
