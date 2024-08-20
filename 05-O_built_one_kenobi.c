@@ -35,6 +35,11 @@ int handle_builtin_commands(char **args, char *input, char **environ)
 		return (execute_ls_with_color(args));
 	}
 
+	if (strcmp(args[0], "help") == 0)
+	{
+		return (help_builtin(args));
+	}
+
 	return (1);
 }
 
@@ -113,4 +118,50 @@ int shell_exit(char **args, char *input)
 		free(input);
 		exit(EXIT_SUCCESS);
 	}
+
+}
+
+/**
+ * help_builtin - Provide information on internal orders.
+ * @args: Array of command arguments.
+ *
+ * Return: return (0) function has been completed successfully.
+ */
+
+int help_builtin(char **args)
+{
+	if (args[1] == NULL) /* */
+	{
+		printf(" cd : changes the current directory\n");
+		printf(" exit : quits the shell programm\n");
+		printf(" env : displays environment variables\n");
+		printf(" help :  displays this help\n");
+
+	}
+	else if (strcmp(args[1], "cd") == 0)
+	{
+		printf("cd: changes the current directory.\nUsage: cd [directory]\n");
+		printf("cd .. : move up one level in the directory tree.");
+		printf("Usage: cd .. [directory]\n");
+		printf("cd - : quickly return to the previous directory.\n");
+		printf("cd / : current working directory to the ");
+		printf("root directory of the file system.\n");
+		printf("cd  ~ : changes the current working ");
+		printf("directory to the home directory.\n");
+	}
+	else if (strcmp(args[1], "exit") == 0)
+	{
+		printf("exit: quits the shell programm.\nUsage: exit [return code]\n");
+	}
+	else if (strcmp(args[1], "env") == 0)
+	{
+		printf("env: Displays environment variables.\nUsage: env\n");
+	}
+	else if (strcmp(args[1], "help") == 0)
+	{
+		printf("help: Displays information on ");
+		printf("internal controls.\nUsage: help [BUILTIN]\n");
+	}
+
+	return (0);
 }
