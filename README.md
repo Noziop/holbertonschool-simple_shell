@@ -245,11 +245,7 @@ sudo mkdir -p /usr/local/man/man1
 After creating the directory structure, installing the manpage with `sudo`to ensure to have the necessary permissions:
 
 ```sh
-<<<<<<< HEAD
 sudo cp man_1_simple_shell /usr/local/man/man1/man_1_simple_shell.1
-=======
-sudo cp man_1_simple_shell /usr/local/man/man1/man_1_simple_shell.1
->>>>>>> 585d6e13e34b0db8a1f143e56a84a2be43200799
 ```
 
 Little breakdown about what this all about:
@@ -274,7 +270,7 @@ sudo mandb
 **Step 4: Try it**
 
 ```sh
-man_1_simple_shell
+man man_1_simple_shell
 ```
 
 ### How we tested our project.
