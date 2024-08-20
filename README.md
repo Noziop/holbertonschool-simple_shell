@@ -40,21 +40,21 @@ Note : This `README.md` will be updated several times as the project progresses.
 
 ##  Summary
 
-	 [Project `Simple Shell`](#project-Simple Shell)
-		[Summary](#summary)
-		[Requierements](#requierements)
-		[Files](#Files)
-		[Operating System:](#operating-system)
-		[Compilation flags](#compilation-flags)
-		[Glossary (in alphabetical order)](#glossary-in-alphabetical-order)
-		[`simple_shell`](#_simple_shell)
-		[How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)
-		[Manpage `simple_shell`](#manpage-man_1_simple_shell)
-		[How we tested our project.](#how-we-tested-our-project)
-		[Some tests to try:](#some-tests-to-try)
-		[Flowchart](#flowchart)
-		[Conclusion](#conclusion)
-		[Author](#author)
+[Project `Simple Shell`](#project-Simple Shell)
+[Summary](#summary)
+[Requierements](#requierements)
+[Files](#Files)
+[Operating System:](#operating-system)
+[Compilation flags](#compilation-flags)
+[Glossary (in alphabetical order)](#glossary-in-alphabetical-order)
+[`simple_shell`](#_simple_shell)
+[How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)
+[Manpage `simple_shell`](#manpage-man_1_simple_shell)
+[How we tested our project.](#how-we-tested-our-project)
+[Some tests to try:](#some-tests-to-try)
+[Flowchart](#flowchart)
+[Conclusion](#conclusion)
+[Author](#author)
 
 ## Requierements
 
