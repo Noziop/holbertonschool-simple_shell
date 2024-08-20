@@ -10,17 +10,17 @@
  */
 char *get_command_path(char *command, char **environ)
 {
-    struct stat st;
+	struct stat st;
 
-    if (command[0] == '/' || command[0] == '.')
-    {
-        if (stat(command, &st) == 0)
-        {
-            return (strdup(command));
-        }
-        return (NULL);
-    }
-    return (find_in_path(command, environ));
+	if (command[0] == '/' || command[0] == '.')
+	{
+		if (stat(command, &st) == 0)
+		{
+			return (strdup(command));
+		}
+		return (NULL);
+	}
+	return (find_in_path(command, environ));
 }
 
 /**
@@ -32,46 +32,45 @@ char *get_command_path(char *command, char **environ)
  */
 char *find_in_path(char *command, char **environ)
 {
-	/* Retrieve the PATH environment variable */
-	char *path_env = _getenv("PATH", environ);
-	char *path_copy, *token, *full_path; /* Variables for path manipulation */
-	 /* Structure to hold file status information */
+	char *path, *path_copy, *dir, *full_path;
+	int command_len, dir_len;
 	struct stat st;
 
-	/* Return NULL if PATH is not found */
-	if (!path_env)
+	if (command[0] == '/' || command[0] == '.')
+	{
+		if (stat(command, &st) == 0)
+			return (strdup(command));
 		return (NULL);
-
-	/* Duplicate the PATH string to avoid modifying the original */
-	path_copy = _strdup(path_env);
+	}
+	path = _getenv("PATH", environ);
+	if (!path)
+		return (NULL);
+	path_copy = strdup(path);
 	if (!path_copy)
 		return (NULL);
 
-	/* Tokenize the PATH string using ':' as a delimiter */
-	token = strtok(path_copy, ":");
-	while (token != NULL)
+	command_len = strlen(command);
+	dir = strtok(path_copy, ":");
+	while (dir)
 	{
-		/* Allocate memory for the full path of the command */
-		full_path = malloc(strlen(token) + strlen(command) + 2);
+		dir_len = strlen(dir);
+		full_path = malloc(dir_len + command_len + 2);
 		if (!full_path)
 		{
-			free(path_copy); /* Free the duplicated PATH string */
+			free(path_copy);
 			return (NULL);
 		}
-		/* Construct the full path by concatenating the token and command */
-		sprintf(full_path, "%s/%s", token, command);
-
-		/* Check if the constructed path is a valid executable */
+		sprintf(full_path, "%s/%s", dir, command);
 		if (stat(full_path, &st) == 0)
 		{
-			free(path_copy); /* Free the duplicated PATH string */
-			return (full_path); /* Return the valid path */
+			free(path_copy);
+			return (full_path);
 		}
-		free(full_path); /* Free the constructed path if not valid */
-		token = strtok(NULL, ":"); /* Get the next token */
+		free(full_path);
+		dir = strtok(NULL, ":");
 	}
-	free(path_copy); /* Free the duplicated PATH string */
-	return (NULL); /* Return NULL if the command is not found in PATH */
+	free(path_copy);
+	return (NULL);
 }
 
 /**
