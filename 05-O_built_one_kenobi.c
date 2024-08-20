@@ -115,7 +115,7 @@ int shell_exit(char **args, char *input, char *program_name)
 	}
 	else
 	{
-		exit_code = 2;
+		exit_code = EXIT_SUCCESS;
 	}
 
 	free(args);
