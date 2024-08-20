@@ -50,11 +50,11 @@ Note : This `README.md` will be updated several times as the project progresses.
 7  -  [`simple_shell`](#_simple_shell)  
 8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
 9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
-10 - [How we tested our project.](#how-we-tested-our-project)  
-11 - [Some tests to try:](#some-tests-to-try)  
-12 - [Flowchart](#flowchart)  
-13 - [Conclusion](#conclusion)  
-14 - [Author](#author)  
+10 -  [How we tested our project.](#how-we-tested-our-project)  
+11 -  [Some tests to try:](#some-tests-to-try)  
+12 -  [Flowchart](#flowchart)  
+13 -  [Conclusion](#conclusion)  
+14 -  [Author](#author)  
 
 ## Requierements
 
