@@ -37,6 +37,11 @@ int handle_builtin_commands(char **args, char *input,
 		return (execute_ls_with_color(args));
 	}
 
+	if (strcmp(args[0], "help") == 0)
+	{
+		return (help_builtin(args));
+	}
+
 	return (1);
 }
 
@@ -164,6 +169,4 @@ int help_builtin(char **args)
 		printf("help: Displays information on ");
 		printf("internal controls.\nUsage: help [BUILTIN]\n");
 	}
-
-	return (0);
 }
