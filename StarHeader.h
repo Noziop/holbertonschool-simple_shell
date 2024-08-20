@@ -32,5 +32,6 @@ int builtin_cd(char **args);
 void sigint_handler(int sig);
 int shell_exit(char **args, char *input);
 int _atoi(char *s);
+int help_builtin(char **args);
 
 #endif /* STARHEADER_H */
