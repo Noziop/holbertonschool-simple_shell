@@ -34,5 +34,6 @@ int shell_exit(char **args, char *input, char *program_name);
 int _atoi(char *s);
 int help_builtin(char **args);
 int is_valid_number(const char *str);
+void help_builtin_cmd(char **args);
 
 #endif /* STARHEADER_H */

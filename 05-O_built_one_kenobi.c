@@ -147,30 +147,53 @@ int help_builtin(char **args)
 		printf("%s :  displays help about help builtin command\n", exit);
 		printf("use this command to get more help about help :  help help\n\n");
 	}
-	else if (strcmp(args[1], "cd") == 0)
+	else
 	{
-		printf("cd allows you to navigate through the file system.\n");
+		help_builtin_cmd(args);
+	}
+	return (0);
+}
+
+/**
+ * help_builtin_cmd - displays help for builtins cmd
+ * @args: command to display help for
+ */
+
+void help_builtin_cmd(char **args)
+{
+	char green[] = "\033[1;32m", end[] = "\033[0m";
+
+	if (strcmp(args[1], "cd") == 0)
+	{
+		printf("%scd%s allows you to navigate ", green, end);
+		printf("through the file system.\n");
 		printf("Usage: cd [directory] example : cd /path/to/");
 		printf("desired/destination. \n\nYou can also use :\n");
-		printf("cd .. : moves up one level in the directory tree.");
-		printf("cd - : returns to the last visited directory\n");
-		printf("cd / : goes to the file system root\n");
-		printf("cd  ~ or cd $HOME or cd : goes to home directory\n ");
+		printf("%scd ..%s : moves up one level ", green, end);
+		printf("in the directory tree.\n");
+		printf("%scd -%s : returns to the last visited directory\n", green, end);
+		printf("%scd /%s : goes to the file system root\n", green, end);
+		printf("%scd  ~%s or %scd $HOME%s", green, end, green, end);
+		printf(" or %scd%s : goes to home directory\n", green, end);
 	}
 	else if (strcmp(args[1], "exit") == 0)
 	{
-		printf("exit: quits the shell programm.\nUsage: exit [return code]\n");
-		printf("you can then, verify exit code with the command : \'echo $?\'\n");
+		printf("%sexit%s: quits the shell programm.\n", green, end);
+		printf("Usage: %sexit [return code]%s\n", green, end);
+		printf("you can then, verify exit code with the command : ");
+		printf("\'%secho $?%s\'\n", green, end);
 	}
 	else if (strcmp(args[1], "env") == 0)
 	{
-		printf("env: Displays environment variables.\nUsage: env\n");
+		printf("%senv%s: Displays environment variables.", green, end);
+		printf("\nUsage (simply type): %senv%s\n", green, end);
 	}
 	else if (strcmp(args[1], "help") == 0)
 	{
-		printf("help: Displays these informations.\n");
-		printf("To display help for help builtin, simply type: \'help help\'\n");
-		printf("(you're already here nonetheless, as you've typed \"help help\")\n");
+		printf("%shelp%s : Displays these informations.\n", green, end);
+		printf("To display help for the help builtin command, ");
+		printf("type: \'%shelp help%s\'\n", green, end);
+		printf("(you're already here nonetheless,");
+		printf(" as you've typed \"%shelp help%s\")\n", green, end);
 	}
-	return (0);
 }
