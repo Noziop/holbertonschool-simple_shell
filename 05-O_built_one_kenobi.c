@@ -146,11 +146,9 @@ int help_builtin(char **args)
 		printf("cd: changes the current directory.\nUsage: cd [directory]\n");
 		printf("cd .. : move up one level in the directory tree.");
 		printf("Usage: cd .. [directory]\n");
-		printf("cd - : quickly return to the previous directory.\n");
-		printf("cd / : current working directory to the ");
-		printf("root directory of the file system.\n");
-		printf("cd  ~ : changes the current working ");
-		printf("directory to the home directory.\n");
+		printf("cd - : returns to the last visited directory\n");
+		printf("cd / : goes to the file system root\n");
+		printf("cd  ~ or cd $HOME or cd : goes to home directory\n ");
 	}
 	else if (strcmp(args[1], "exit") == 0)
 	{
