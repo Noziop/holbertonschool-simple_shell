@@ -51,7 +51,7 @@ Note : This `README.md` will be updated several times as the project progresses.
 7  -  [`simple_shell`](#_simple_shell)  
 8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
 9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
-10 -  [Blog on Medium](#blog on medium)  
+10 -  [Blog on Medium](#blog-on-medium)   
 11 -  [How we tested our project.](#how-we-tested-our-project)  
 12 -  [Some tests to try:](#some-tests-to-try)  
 13 -  [Flowchart](#flowchart)  
@@ -244,7 +244,7 @@ First, it's requiered to create the necessary directories if they don't already 
 ```sh
 sudo mkdir -p /usr/local/man/man1
 ```
-## 
+
 **Step 2: Install the manpage**
 
 After creating the directory structure, installing the manpage with `sudo`to ensure to have the necessary permissions:
