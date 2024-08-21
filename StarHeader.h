@@ -30,11 +30,8 @@ void execute_child_process(char *command_path, char **args, char **environ);
 int execute_ls_with_color(char **args, char **environ);
 int builtin_cd(char **args, char **env);
 void sigint_handler(int sig);
-int shell_exit(char **args, char *input, char *program_name);
-int help_builtin(char **args);
-
-/* Helpers */
+int shell_exit(char **args, char *input);
 int _atoi(char *s);
-int is_valid_number(const char *str);
+int help_builtin(char **args);
 
 #endif /* STARHEADER_H */

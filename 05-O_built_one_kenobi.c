@@ -53,9 +53,14 @@ int handle_builtin_commands(char **args, char *input,
  */
 int builtin_cd(char **args, char **env)
 {
+<<<<<<< Updated upstream
 	char cwd[PATH_MAX], *dir = NULL, *home_dir = NULL;
 	static char old_pwd[PATH_MAX] = {0};
 	int i;
+=======
+	char *dir, cwd[PATH_MAX];
+	char *oldpwd = getenv("OLDPWD");
+>>>>>>> Stashed changes
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 		return (-1);
@@ -99,7 +104,11 @@ int builtin_cd(char **args, char **env)
  * @program_name: name of shell exec to print correct error output
  * Return: EXIT_SUCCESS if no argument is given by user
  *			exit_code provided by user within args[1]
+<<<<<<< Updated upstream
 */
+=======
+ */
+>>>>>>> Stashed changes
 
 int shell_exit(char **args, char *input, char *program_name)
 {
@@ -118,6 +127,7 @@ int shell_exit(char **args, char *input, char *program_name)
 	{
 		exit_code = EXIT_SUCCESS;
 	}
+<<<<<<< Updated upstream
 
 	free(args);
 	free(input);
@@ -166,3 +176,7 @@ int help_builtin(char **args)
 		printf("internal controls.\nUsage: help [BUILTIN]\n");
 	}
 }
+=======
+}
+
+>>>>>>> Stashed changes
