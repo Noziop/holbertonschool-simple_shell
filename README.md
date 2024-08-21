@@ -307,5 +307,5 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 ## Author
 
-**Fassih Belmokthar**
+**Fassih Belmokthar** &
 **Xavier Piedallu**
