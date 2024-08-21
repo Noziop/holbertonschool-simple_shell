@@ -281,9 +281,9 @@ man man_1_simple_shell
 ## Blog on Medium [#What happens?]
 
 Link to the blog created by Xa-C24&Nozoip on the Medium platform explaining what happens when you type "ls -l *c" in the shell terminal.
-```sh
-		[Read this article on Medium](https://medium.com/@9335/what-happens-when-you-type-ls-l-c-in-the-shell-c677b2804141)
-```
+
+[Read this article on Medium](https://medium.com/@9335/what-happens-when-you-type-ls-l-c-in-the-shell-c677b2804141)
+
 
 ### How we tested our project.
 
