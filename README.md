@@ -286,7 +286,7 @@ Click and you'll see, it's magic >>>>> [Read this article on Medium](https://med
 
 
 
-### How we tested our project.
+### How we tested our project
 
 In this section, we are going to focus on the construction of the script itself and especially how we tested it, more than explaining how it works (it has already been explained in previous section).
 
