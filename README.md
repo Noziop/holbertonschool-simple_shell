@@ -28,14 +28,14 @@ The respective command typed by the user is then parsed and executed as if in a 
 
 	To begin with, we decided to devide the work:
 
-	_Fassy will: .Creat GitHub repository
-				 .Creat flowchart
-				 .Creat all files
+	_Fassy will: 	.Creat GitHub repository
+			.Creat flowchart
+			.Creat all files
 				
 
-	_Xavier	will: .Creat README.md
-				  .Creat man_page
-				  .Creat blog on Medium	
+	_Xavier	will: 	  .Creat README.md
+			  .Creat man_page
+			  .Creat blog on Medium	
 
 
 Note : This `README.md` will be updated several times as the project progresses.
