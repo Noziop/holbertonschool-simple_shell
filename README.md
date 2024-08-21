@@ -28,14 +28,14 @@ The respective command typed by the user is then parsed and executed as if in a 
 
 	To begin with, we decided to devide the work:
 
-	_Fassy will: .Creat GitHub repository
-				 .Creat flowchart
-				 .Creat all files
+	_Fassy will: 	.Creat GitHub repository
+			.Creat flowchart
+			.Creat all files
 				
 
-	_Xavier	will: .Creat README.md
-				  .Creat man_page
-				  .Creat blog on Medium	
+	_Xavier	will: 	  .Creat README.md
+			  .Creat man_page
+			  .Creat blog on Medium	
 
 
 Note : This `README.md` will be updated several times as the project progresses.
@@ -51,8 +51,12 @@ Note : This `README.md` will be updated several times as the project progresses.
 7  -  [`simple_shell`](#_simple_shell)  
 8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
 9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 10 -  [Blog on Medium](#What happens?)    
+=======
+10 -  [Blog on Medium](#blog-on-medium)   
+>>>>>>> 521e59966467447f618535e383c1ba10d5e93839
 11 -  [How we tested our project.](#how-we-tested-our-project)  
 12 -  [Some tests to try:](#some-tests-to-try)  
 13 -  [Flowchart](#flowchart)  
@@ -252,7 +256,7 @@ First, it's requiered to create the necessary directories if they don't already 
 ```sh
 sudo mkdir -p /usr/local/man/man1
 ```
-## 
+
 **Step 2: Install the manpage**
 
 After creating the directory structure, installing the manpage with `sudo`to ensure to have the necessary permissions:
@@ -286,14 +290,15 @@ sudo mandb
 man man_1_simple_shell
 ```
 
-## Blog on Medium
+## Blog on Medium [#What happens?]
 
 Link to the blog created by Xa-C24&Nozoip on the Medium platform explaining what happens when you type "ls -l *c" in the shell terminal.
-```sh
-		https://medium.com/@9335/what-happens-when-you-type-ls-l-c-in-the-shell-c677b2804141
-```
 
-### How we tested our project.
+Click and you'll see, it's magic >>>>> [Read this article on Medium](https://medium.com/@9335/what-happens-when-you-type-ls-l-c-in-the-shell-c677b2804141)
+
+
+
+### How we tested our project
 
 In this section, we are going to focus on the construction of the script itself and especially how we tested it, more than explaining how it works (it has already been explained in previous section).
 
@@ -315,5 +320,5 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 ## Author
 
-**Fassih Belmokthar**
+**Fassih Belmokthar** &
 **Xavier Piedallu**
