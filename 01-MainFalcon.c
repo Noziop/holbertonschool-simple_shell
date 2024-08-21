@@ -16,7 +16,7 @@ int main(int argc, char **argv, char **envp)
 	int status = 1; /* Status flag to control the shell loop */
 
 	(void)argc; /* Unused parameter */
-	(void)argv; /* Unused parameter */
+	/* (void)argv; Unused parameter */
 
 	/* Main loop of the shell */
 	while (status)
