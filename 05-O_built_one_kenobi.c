@@ -133,19 +133,26 @@ int shell_exit(char **args, char *input, char *program_name)
 
 int help_builtin(char **args)
 {
+	char cd[] = "\033[1;32mcd\033[0m", exit[] = "\033[1;32mhelp\033[0m";
+
 	if (args[1] == NULL) /* */
 	{
-		printf(" cd : changes the current directory\n");
-		printf(" exit : quits the shell programm\n");
-		printf(" env : displays environment variables\n");
-		printf(" help :  displays this help\n");
-
+		printf("here are the builtins commands we\'ve implemented so far :\n\n");
+		printf("%s : allows you to navigate through the file system\n", cd);
+		printf("use this command to get more help about cd :  help cd\n\n");
+		printf("\033[1;32mexit\033[0m : exits the shell programm\n");
+		printf("use this command to get more help about exit :  help exit\n\n");
+		printf("\033[1;32menv\033[0m : displays environment variables\n");
+		printf("use this command to get more help about env :  help env\n\n");
+		printf("%s :  displays help about help builtin command\n", exit);
+		printf("use this command to get more help about help :  help help\n\n");
 	}
 	else if (strcmp(args[1], "cd") == 0)
 	{
-		printf("cd: changes the current directory.\nUsage: cd [directory]\n");
-		printf("cd .. : move up one level in the directory tree.");
-		printf("Usage: cd .. [directory]\n");
+		printf("cd allows you to navigate through the file system.\n");
+		printf("Usage: cd [directory] example : cd /path/to/");
+		printf("desired/destination. \n\nYou can also use :\n");
+		printf("cd .. : moves up one level in the directory tree.");
 		printf("cd - : returns to the last visited directory\n");
 		printf("cd / : goes to the file system root\n");
 		printf("cd  ~ or cd $HOME or cd : goes to home directory\n ");
@@ -153,6 +160,7 @@ int help_builtin(char **args)
 	else if (strcmp(args[1], "exit") == 0)
 	{
 		printf("exit: quits the shell programm.\nUsage: exit [return code]\n");
+		printf("you can then, verify exit code with the command : \'echo $?\'\n");
 	}
 	else if (strcmp(args[1], "env") == 0)
 	{
@@ -160,8 +168,9 @@ int help_builtin(char **args)
 	}
 	else if (strcmp(args[1], "help") == 0)
 	{
-		printf("help: Displays information on ");
-		printf("internal controls.\nUsage: help [BUILTIN]\n");
+		printf("help: Displays these informations.\n");
+		printf("To display help for help builtin, simply type: \'help help\'\n");
+		printf("(you're already here nonetheless, as you've typed \"help help\")\n");
 	}
 	return (0);
 }
