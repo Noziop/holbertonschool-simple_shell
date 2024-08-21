@@ -99,5 +99,3 @@ void execute_child_process(char *command_path, char **args, char **environ)
 		waitpid(pid, &status, 0);
 	}
 }
-
-

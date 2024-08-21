@@ -165,4 +165,5 @@ int help_builtin(char **args)
 		printf("help: Displays information on ");
 		printf("internal controls.\nUsage: help [BUILTIN]\n");
 	}
+	return (0);
 }
