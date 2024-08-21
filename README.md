@@ -278,7 +278,7 @@ sudo mandb
 man man_1_simple_shell
 ```
 
-## Blog on Medium
+## Blog on Medium [#What happens?]
 
 Link to the blog created by Xa-C24&Nozoip on the Medium platform explaining what happens when you type "ls -l *c" in the shell terminal.
 ```sh
