@@ -51,7 +51,7 @@ Note : This `README.md` will be updated several times as the project progresses.
 7  -  [`simple_shell`](#_simple_shell)  
 8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
 9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
-10 -  [Blog on Medium](#What happens?)  
+10 -  [Blog on Medium](#What happens?)    
 11 -  [How we tested our project.](#how-we-tested-our-project)  
 12 -  [Some tests to try:](#some-tests-to-try)  
 13 -  [Flowchart](#flowchart)  
