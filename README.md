@@ -11,14 +11,14 @@ First, clone this repository to your local machine:
 
 For this project, we will adopt the following method to facilitate collaboration:
 
-	_Working on a local branch:
+Working on a local branch:
 	
-	.Each team member will work on their own branch locally. Create a branch from `main` with a descriptive name:
+Each team member will work on their own branch locally. Create a branch from `main` with a descriptive name:
 
 				- git branch Xa
 				- git branch fassih
 
-	.Common branch: main
+Common branch: main
 
 The Simple Shell is a simple UNIX command interpreter written entirely in C. 
 The program runs based on bash commands obtained from the command line interface (CLI) given by the user. 
@@ -26,16 +26,17 @@ Any text seperated by a any number of spaces, tabs or a combination of both is c
 The respective command typed by the user is then parsed and executed as if in a regular UNIX shell.
 
 
-	To begin with, we decided to devide the work:
+To begin with, we decided to devide the work:
 
-	_Fassy will: 	.Creat GitHub repository
-			.Creat flowchart
-			.Creat all files
+
+Fassih will: .Creat GitHub repository
+		     .Create flowchart
+		     .Create all files
 				
 
-	_Xavier	will: 	  .Creat README.md
-			  .Creat man_page
-			  .Creat blog on Medium	
+Xavier	will: .Create README.md
+	      .Create man_page
+	      .Create blog on Medium	
 
 
 Note : This `README.md` will be updated several times as the project progresses.
@@ -51,24 +52,13 @@ Note : This `README.md` will be updated several times as the project progresses.
 7  -  [`simple_shell`](#_simple_shell)  
 8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
 9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-10 -  [Blog on Medium](#What happens?)    
-=======
-10 -  [Blog on Medium](#blog-on-medium)   
->>>>>>> 521e59966467447f618535e383c1ba10d5e93839
+10 -  [Blog on Medium](#blog-on-Medium)  
 11 -  [How we tested our project.](#how-we-tested-our-project)  
 12 -  [Some tests to try:](#some-tests-to-try)  
 13 -  [Flowchart](#flowchart)  
 14 -  [Conclusion](#conclusion)  
 15 -  [Author](#author)  
-=======
-10 -  [How we tested our project.](#how-we-tested-our-project)  
-11 -  [Some tests to try:](#some-tests-to-try)  
-12 -  [Flowchart](#flowchart)  
-13 -  [Conclusion](#conclusion)  
-14 -  [Author](#author)  
->>>>>>> Stashed changes
+
 
 ## Requierements
 
