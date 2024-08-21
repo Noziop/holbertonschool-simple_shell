@@ -68,31 +68,3 @@ char **split_string(char *str)
 	tokens[i] = NULL; /* Null-terminate the array of tokens */
 	return (tokens); /* Return the array of tokens */
 }
-
-/**
- * _strdup - Duplicates a string
- * @str: The string to duplicate
- *
- * Return: A pointer to the duplicated string, or NULL if insufficient memory
- */
-char *_strdup(const char *str)
-{
-	char *dup; /* Pointer to the duplicated string */
-	size_t len; /* Length of the input string */
-
-	/* Return NULL if the input string is NULL */
-	if (str == NULL)
-		return (NULL);
-
-	len = strlen(str); /* Get the length of the input string */
-	/* Allocate memory for the duplicated string */
-	dup = malloc((len + 1) * sizeof(char));
-	if (dup == NULL)
-	{
-		/* Print error message and return NULL if allocation fails */
-		perror("Error");
-		return (NULL);
-	}
-	strcpy(dup, str); /* Copy the input string to the duplicated string */
-	return (dup); /* Return the duplicated string */
-}
