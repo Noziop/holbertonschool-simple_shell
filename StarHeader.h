@@ -36,5 +36,6 @@ int help_builtin(char **args);
 
 /* Helpers */
 int _atoi(char *s);
+int is_valid_number(const char *str);
 
 #endif /* STARHEADER_H */
