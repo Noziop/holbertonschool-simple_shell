@@ -29,12 +29,12 @@ int handle_builtin_commands(char **args, char *input,
 
 	if (strcmp(args[0], "cd") == 0)
 	{
-		return (builtin_cd(args));
+		return (builtin_cd(args, environ));
 	}
 
 	if (strcmp(args[0], "ls") == 0)
 	{
-		return (execute_ls_with_color(args));
+		return (execute_ls_with_color(args, environ));
 	}
 
 	if (strcmp(args[0], "help") == 0)
@@ -46,54 +46,50 @@ int handle_builtin_commands(char **args, char *input,
 }
 
 /**
- * builtin_cd - handle the cd cmd
- * @args: command and arguments
- *
- * Return: 0 if success, -1 if error.
+ * builtin_cd - Change the current directory
+ * @args: Arguments passed to cd command
+ * @env: Environment variables
+ * Return: 0 on success, -1 on failure
  */
-
-int builtin_cd(char **args)
+int builtin_cd(char **args, char **env)
 {
-	char *dir, cwd[PATH_MAX];
-	char *oldpwd = getenv("OLDPWD");
+	char cwd[PATH_MAX], *dir = NULL, *home_dir = NULL;
+	static char old_pwd[PATH_MAX] = {0};
+	int i;
 
-	if (args[1] == NULL || strcmp(args[1], "~") == 0
-	|| strcmp(args[1], "$HOME") == 0)
-	{
-		dir = getenv("HOME");
-	}
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+		return (-1);
+
+	for (i = 0; env[i]; i++)
+		if (strncmp(env[i], "HOME=", 5) == 0)
+		{
+			home_dir = env[i] + 5;
+			break;
+		}
+
+	if (!args[1] || strcmp(args[1], "~") == 0 || strcmp(args[1], "$HOME") == 0)
+		dir = home_dir;
 	else if (strcmp(args[1], "-") == 0)
 	{
-		if (oldpwd == NULL)
+		if (old_pwd[0] != '\0')
 		{
-			fprintf(stderr, "cd: OLDPWD not set\n");
-			return (-1);
+			dir = old_pwd;
+			printf("%s\n", dir);
 		}
-		dir = oldpwd;
-		printf("%s\n", dir);
+		else
+			return (0);
 	}
 	else
-	{
 		dir = args[1];
-	}
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+
+	if (chdir(dir) == 0)
 	{
-		perror("getcwd error");
-		return (-1);
+		strcpy(old_pwd, cwd);
+		return (0);
 	}
-	if (chdir(dir) == -1)
-	{
-		perror("cd");
-		return (-1);
-	}
-	setenv("OLDPWD", cwd, 1);
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd error");
-		return (-1);
-	}
-	setenv("PWD", cwd, 1);
-	return (0);
+
+	perror("cd");
+	return (-1);
 }
 
 /**
@@ -103,7 +99,7 @@ int builtin_cd(char **args)
  * @program_name: name of shell exec to print correct error output
  * Return: EXIT_SUCCESS if no argument is given by user
  *			exit_code provided by user within args[1]
- */
+*/
 
 int shell_exit(char **args, char *input, char *program_name)
 {
