@@ -1,6 +1,5 @@
 #include "StarHeader.h"
 
-
 /**
  * get_command_path - Determines the path of the command
  * @command: The command to find
@@ -12,14 +11,20 @@ char *get_command_path(char *command, char **environ)
 {
 	struct stat st;
 
+	/* Check if the command starts with '/' or '.' (absolute or relative path) */
 	if (command[0] == '/' || command[0] == '.')
 	{
+		/* Check if the file exists and is accessible */
 		if (stat(command, &st) == 0)
 		{
+			/* If it exists, return a copy of the command */
 			return (strdup(command));
 		}
+		/* If the file doesn't exist or isn't accessible, return NULL */
 		return (NULL);
 	}
+
+	/* If it's not an absolute or relative path, search in PATH */
 	return (find_in_path(command, environ));
 }
 
@@ -36,52 +41,60 @@ char *find_in_path(char *command, char **environ)
 	int command_len, dir_len;
 	struct stat st;
 
+	/* Check if command is already a path */
 	if (command[0] == '/' || command[0] == '.')
 	{
-		if (stat(command, &st) == 0)
+		if (stat(command, &st) == 0)/* If it exists, return a copy */
 			return (strdup(command));
 		return (NULL);
 	}
-	path = _getenv("PATH", environ);
+	path = _getenv("PATH", environ);/* Get the PATH environment variable */
 	if (!path)
 		return (NULL);
-	path_copy = strdup(path);
+	path_copy = strdup(path);/*copy of PATH to avoid modifying the original */
 	if (!path_copy)
 		return (NULL);
-
 	command_len = strlen(command);
+	/* Tokenize PATH and iterate through each directory */
 	dir = strtok(path_copy, ":");
 	while (dir)
 	{
 		dir_len = strlen(dir);
-		full_path = malloc(dir_len + command_len + 2);
+		full_path = malloc(dir_len + command_len + 2);/* Allocate memory full path */
 		if (!full_path)
 		{
 			free(path_copy);
 			return (NULL);
 		}
-		sprintf(full_path, "%s/%s", dir, command);
-		if (stat(full_path, &st) == 0)
+		sprintf(full_path, "%s/%s", dir, command);/* Construct full path */
+		if (stat(full_path, &st) == 0)/* Check if file exists and is executable */
 		{
 			free(path_copy);
 			return (full_path);
 		}
-		free(full_path);
+		free(full_path);/* Free memory if file not found in this directory */
 		dir = strtok(NULL, ":");
 	}
-	free(path_copy);
+	free(path_copy);/* Free PATH copy and return NULL if command not found */
 	return (NULL);
 }
 
 /**
  * sigint_handler - avoid ctrl+c to quit program
- * @sig: keybordentry.
+ * @sig: keyboard entry
  */
 void sigint_handler(int sig)
 {
+	/* Suppress unused parameter warning */
 	(void)sig;
+
+	/* Print a new line to move to the next line after ^C */
 	write(STDOUT_FILENO, "\n", 1);
+
+	/* Display the shell prompt again */
 	display_prompt();
+
+	/* Flush the output buffer to ensure prompt is displayed immediately */
 	fflush(stdout);
 }
 

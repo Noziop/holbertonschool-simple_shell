@@ -12,21 +12,28 @@ int execute_command(char **args, char **environ, char *program_name)
 {
 	char *command_path;
 
+	/* Check if there's a command to execute */
 	if (args[0] == NULL)
 		return (1);
 
+	/* Get the full path of the command */
 	command_path = get_command_path(args[0], environ);
+
+	/* If command not found, print error and return */
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: 1: %s: not found\n", program_name, args[0]);
 		return (1);
 	}
 
+	/* Execute the command in a child process */
 	execute_child_process(command_path, args, environ);
 
+	/* Free allocated memory if command_path is different from args[0] */
 	if (command_path != args[0])
 		free(command_path);
 
+	/* Return 1 to continue shell execution */
 	return (1);
 }
 
@@ -71,31 +78,39 @@ int execute_ls_with_color(char **args, char **environ)
 
 /**
  * execute_child_process - Forks and executes a command
- * @command_path: bla
+ * @command_path: Full path of the command to execute
  * @args: Array of command arguments
- * @environ: bla
+ * @environ: Environment variables
  */
 void execute_child_process(char *command_path, char **args, char **environ)
 {
+	/* Create a new process */
 	pid_t pid = fork();
 
+	/* Check if fork failed */
 	if (pid == -1)
 	{
 		perror("Fork failed");
 		return;
 	}
+
+	/* Child process */
 	if (pid == 0)
 	{
+		/* Execute the command */
 		if (execve(command_path, args, environ) == -1)
 		{
+			/* If execution fails, print error and exit */
 			perror("Execution failed");
 			exit(EXIT_FAILURE);
 		}
 	}
+	/* Parent process */
 	else
 	{
 		int status;
 
+		/* Wait for child process to complete */
 		waitpid(pid, &status, 0);
 	}
 }
