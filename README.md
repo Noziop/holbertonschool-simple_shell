@@ -47,7 +47,7 @@ Note : This `README.md` will be updated several times as the project progresses.
 2  -  [Requierements](#requierements)  
 3  -  [Files](#Files)  
 4  -  [Operating System:](#operating-system)  
-5  -  [Compilation flags](#compilation-flags) 
+5  -  [Compilation flags](#compilation-flags)  
 6  -  [Code snippets](#Code snippets)  
 7  -  [Exemples](#Exemples)  
 8  -  [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)  
