@@ -47,17 +47,19 @@ Note : This `README.md` will be updated several times as the project progresses.
 2  -  [Requierements](#requierements)  
 3  -  [Files](#Files)  
 4  -  [Operating System:](#operating-system)  
-5  -  [Compilation flags](#compilation-flags)  
-6  -  [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)  
-7  -  [`simple_shell`](#_simple_shell)  
-8  -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
-9  -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
-10 -  [Blog on Medium](#blog-on-Medium)  
-11 -  [How we tested our project.](#how-we-tested-our-project)  
-12 -  [Some tests to try:](#some-tests-to-try)  
-13 -  [Flowchart](#flowchart)  
-14 -  [Conclusion](#conclusion)  
-15 -  [Author](#author)  
+5  -  [Compilation flags](#compilation-flags) 
+6  -  [Code snippets](#Code snippets)  
+7  -  [Exemples](#Exemples)  
+8  -  [Glossary (in alphabetical order)](#glossary-in-alphabetical-order)  
+9  -  [`simple_shell`](#_simple_shell)  
+10 -  [How to use `simple_shell` and its specifier?](#how-to-use-_printf-and-its-specifier)  
+11 -  [Manpage `simple_shell`](#manpage-man_1_simple_shell)  
+12 -  [Blog on Medium](#blog-on-Medium)  
+13 -  [How we tested our project.](#how-we-tested-our-project)  
+14 -  [Some tests to try:](#some-tests-to-try)  
+15 -  [Flowchart](#flowchart)  
+16 -  [Conclusion](#conclusion)  
+17 -  [Author](#author)  
 
 
 ## Requierements
@@ -101,7 +103,9 @@ sudo apt-get install gcc
 
 ```sh
 git clone https://github.com/holbertonschool/Betty.git
+
 cd Betty
+
 ./install.sh
 ```
 
@@ -139,6 +143,115 @@ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 .c -o hsh
 - **`-std=gnu89`:** Uses the GNU89 standard for C, allowing GNU extensions to the ANSI C standard
 
 - **`Wno-format`:** Disables format warnings.
+
+## Code snippets
+```
+/**
+ * main - Entry point of the simple shell
+ * @argc: Argument count
+ * @argv: Argument vector
+ * @envp: Environment variables
+ *
+ * Return: Always 0 (Success)
+ */
+int main(int argc, char **argv, char **envp)
+{
+	char *input = NULL; /* Buffer to store user input */
+	size_t bufsize = 0; /* Size of the input buffer */
+	char **args; /* Array to store command arguments */
+	int status = 1; /* Status flag to control the shell loop */
+
+	(void)argc; /* Unused parameter */
+	/* (void)argv; Unused parameter */
+
+	/* Main loop of the shell */
+	while (status)
+	{
+		/* Display the prompt only in interactive mode */
+		if (isatty(STDIN_FILENO))
+			display_prompt();
+
+		/* Read a line of input from the user */
+		if (getline(&input, &bufsize, stdin) == -1)
+		{
+			free(input); /* Free the input buffer */
+			exit(EXIT_SUCCESS); /* Exit the shell on EOF */
+		}
+
+		/* avoid CTRL+C */
+		signal(SIGINT, sigint_handler);
+		/* Remove the newline character from the input */
+		remove_newline(input);
+		/* Split the input into an array of arguments */
+		args = split_string(input);
+		/* Handle built-in commands */
+		if (handle_builtin_commands(args, input, envp, argv[0]) == 0)
+		{
+			free(args); /* Free the arguments array */
+			continue; /* Continue the loop for the next command */
+		}
+		/* Execute external commands */
+		status = execute_command(args, envp, argv[0]);
+		free(args); /* Free the arguments array */
+	}
+	free(input); /* Free the input buffer */
+	return (0); /* Return success */
+}
+```
+
+
+## Exemples
+
+You can use aowr in interactiv mode:
+
+```bash
+root@hey-coucou-xav:~/holbertonschool-simple_shell# ./test/simple_shell
+root@Xa-C24&Noziop_shell:/root/holbertonschool-simple_shell$ ls -l
+total 880
+-rw-r--r-- 1 root root   2231 Aug 21 16:58  01-MainFalcon.c
+-rw-r--r-- 1 root root   1740 Aug 21 16:58  02-SplitSabers.c
+-rw-r--r-- 1 root root   1984 Aug 21 17:05  03-execute_command_66.c
+-rw-r--r-- 1 root root   2893 Aug 21 16:58  04-This_is_the_path.c
+-rw-r--r-- 1 root root   4990 Aug 22 08:38  05-O_built_one_kenobi.c
+-rw-r--r-- 1 root root   3708 Aug 16 12:04 '07- What_happens?'
+-rw-r--r-- 1 root root   3157 Aug 19 11:08 '07-What_happens?'
+-rw-r--r-- 1 root root    166 Aug 19 11:08  AUTHORS
+-rw-r--r-- 1 root root   1063 Aug 12 11:54  LICENSE
+-rw-r--r-- 1 root root  12254 Aug 22 08:48  README.md
+-rw-r--r-- 1 root root   1234 Aug 22 08:38  StarHeader.h
+-rw-r--r-- 1 root root    803 Aug 20 13:28  helpers.c
+-rwxr-xr-x 1 root root  22312 Aug 22 08:49  hs
+-rwxr-xr-x 1 root root  22272 Aug 22 08:37  hsh
+-rw-r--r-- 1 root root   2900 Aug 21 16:58  man_1_simple_shell
+-rw-r--r-- 1 root root 770248 Aug 19 11:08  simpleshell.flowchart.png
+drwxr-xr-x 1 root root   4096 Aug 22 08:49  test
+root@Xa-C24&Noziop_shell:/root/holbertonschool-simple_shell$ 
+```
+
+Or you can use it non interactiv mode:
+```bash
+root@hey-coucou-xav:~/holbertonschool-simple_shell# echo "ls -l" | ./test/simple_shell 
+total 884
+-rw-r--r-- 1 root root   2231 Aug 21 16:58  01-MainFalcon.c
+-rw-r--r-- 1 root root   1740 Aug 21 16:58  02-SplitSabers.c
+-rw-r--r-- 1 root root   1984 Aug 21 17:05  03-execute_command_66.c
+-rw-r--r-- 1 root root   2893 Aug 21 16:58  04-This_is_the_path.c
+-rw-r--r-- 1 root root   4990 Aug 22 08:38  05-O_built_one_kenobi.c
+-rw-r--r-- 1 root root   3708 Aug 16 12:04 '07- What_happens?'
+-rw-r--r-- 1 root root   3157 Aug 19 11:08 '07-What_happens?'
+-rw-r--r-- 1 root root    166 Aug 19 11:08  AUTHORS
+-rw-r--r-- 1 root root   1063 Aug 12 11:54  LICENSE
+-rw-r--r-- 1 root root  13510 Aug 22 08:51  README.md
+-rw-r--r-- 1 root root   1234 Aug 22 08:38  StarHeader.h
+-rw-r--r-- 1 root root    803 Aug 20 13:28  helpers.c
+-rwxr-xr-x 1 root root  22312 Aug 22 08:49  hs
+-rwxr-xr-x 1 root root  22272 Aug 22 08:37  hsh
+-rw-r--r-- 1 root root   2900 Aug 21 16:58  man_1_simple_shell
+-rw-r--r-- 1 root root 770248 Aug 19 11:08  simpleshell.flowchart.png
+drwxr-xr-x 1 root root   4096 Aug 22 08:49  test
+root@hey-coucou-xav:~/holbertonschool-simple_shell#
+```
+
 
 ## Glossary (in alphabetical order)
 
@@ -217,22 +330,22 @@ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 .c -o hsh
 
 **Definition:**
 
-	`simple_shell` A simple shell is a computer program that acts as an interface between the user and the operating system. It allows the user to enter commands via a command line interface, which are then interpreted and executed by the system.
+`simple_shell` A simple shell is a computer program that acts as an interface between the user and the operating system. It allows the user to enter commands via a command line interface, which are then interpreted and executed by the system.
 
 **Why use it?**
 
-	`simple_shell`, such as Bash, has several significant advantages:
+`simple_shell`, such as Bash, has several significant advantages:
 
-	1. **Efficiency:** The shell lets you execute commands quickly via a command-line interface, which is often more efficient than graphical interfaces, especially for repetitive or complex tasks 1 2.
-	2. **Automation:** The shell can be used to automate tasks using scripts. These scripts can combine several commands into a single operation, reducing the time and effort needed to perform repetitive tasks 5.
-	3. **Total control:** By using the shell, users can interact directly with the operating system, offering more granular control over system operations, such as file and process management 3 4. 
-	4. **Portability:** Bash is available on many Linux distributions and other Unix systems, making it a versatile and accessible tool for developers and system administrators 3 5. 
-	5. **Customisation:** The shell can be customised, allowing users to change colours, keyboard shortcuts and add custom commands, enhancing the user experience 3. 
-	6. **Learning Unix systems:** Mastery of the shell is essential for understanding and working effectively with Unix systems, as many administrative tasks and scripts are written in shell 1 2.
+1. **Efficiency:** The shell lets you execute commands quickly via a command-line interface, which is often more efficient than graphical interfaces, especially for repetitive or complex tasks 1 2.
+2. **Automation:** The shell can be used to automate tasks using scripts. These scripts can combine several commands into a single operation, reducing the time and effort needed to perform repetitive tasks 5.
+3. **Total control:** By using the shell, users can interact directly with the operating system, offering more granular control over system operations, such as file and process management 3 4. 
+4. **Portability:** Bash is available on many Linux distributions and other Unix systems, making it a versatile and accessible tool for developers and system administrators 3 5. 
+5. **Customisation:** The shell can be customised, allowing users to change colours, keyboard shortcuts and add custom commands, enhancing the user experience 3. 
+6. **Learning Unix systems:** Mastery of the shell is essential for understanding and working effectively with Unix systems, as many administrative tasks and scripts are written in shell 1 2.
 
 ### How to use `simple_shell`
 
-	`simple_shell` open a terminal or command prompt window on your system.
+`simple_shell` open a terminal or command prompt window on your system.
 
 
 ## Manpage `simple_shell`
@@ -306,7 +419,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 ## Conclusion
 
-	The simple shell, like Bash, is a powerful and versatile tool that offers numerous advantages for interacting with the operating system.
+The simple shell, like Bash, is a powerful and versatile tool that offers numerous advantages for interacting with the operating system.
 
 ## Author
 
