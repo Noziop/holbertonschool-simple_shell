@@ -1,0 +1,55 @@
+What happens when you type ls -l *.c in the shell?
+
+
+In this blog post, we will dive deep into the process, detailing seven steps from the moment you type ls -l *.c in the terminal, 
+press "Enter", to the point where the output is displayed on the screen.
+
+
+1_The first step involves parsing the input.
+
+When you type ls -l *.c in a terminal and press "Enter", the shell reads the entire line as a string and analyzes it. 
+ls is the command, -l is an option, and *.c is a wildcard used to match all files in the current directory that end with the .c extension.
+
+
+2_The second step handles wildcard expansion.
+
+The shell then manages the wildcard expansion. The shell will scan for all files ending in .c. For example, if your directory contains the files README.md, main.c, main.h, test.c, and love_c.c, the shell will expand and consider only the files with the .c extension: main.c, test.c, and love_c.c.
+This process is known as "globbing." The expansion will filter out names that match the pattern.
+
+
+3_The third step prepares the command for execution.
+
+	Once the shell has expanded the wildcard, it prepares to execute the command. 
+At this stage, the command line in the terminal looks like this: ls -l main.c test.c love.c.
+The shell searches for the ls executable. It does this by looking in the directories listed in the PATH environment variable.
+When it finds the ls binary, it prepares to execute it.
+
+
+4_The fourth step creates a new process called a child process to execute the command.
+
+
+5_In the fifth step, the child process executes the ls command using the execve() function.
+
+	What is the execve() function? 		exec: execute, runs a program.
+										ve: indicates that the function takes an environment (envp) in addition to an argument (argv).
+				
+			execve is a function that executes a program while allowing you to specify both the arguments and the environment in which the program runs.
+
+6_In the sixth step, the results are displayed.
+
+	Once you press the "Enter" key on your keyboard, the ls command runs, and the shell will display the results in a list thanks to the -l option.
+	You will see a visual representation of the files in your directory with the .c extension.
+	The command then outputs this information to the terminal. This output is generally handled by writing to the standard output file descriptor (stdout), which is connected to your terminal.
+
+
+7_In this seventh and final step, the child process terminates and returns its exit status to the parent process (the shell).
+The shell then regains control and displays a new prompt, ready to accept the user's next command.
+
+
+	This seemingly simple command involves numerous steps, each utilizing different functions of the operating system.
+Understanding this process not only helps demystify how the shell works but also deepens our understanding of UNIX-like operating systems.
+
+	If you found this article helpful, consider sharing it with others who might be interested in learning about how the shell works. 
+Don’t hesitate to leave a "like"—it's always appreciated! Feel free to comment, and happy coding!
+
+																	Xa-C24 & Noziop, cheers!
